@@ -48,33 +48,34 @@ def valorePezzi(pezzo):
         return 0
 
 #valuta una posizione sulla scacchiera
-def valuta(board,mat):
+def valuta(board):
     punteggioBianco = 0
     punteggioNero = 0
-    for i in range(0,64):
-            if (board[i] != ""):
-                if (board[i][0] == "b"):
+    for i in range(8):
+        for j in range(8):
+            if (board[i][j] != ""):
+                if (board[i][j][0] == "b"):
                     # valore del pezzo
-                    punteggioBianco += valorePezzi(board[i])
+                    punteggioBianco += valorePezzi(board[i][j])
                     # posizione del pezzo 
-                    if(board[i][1] == "P"):
-                        punteggioBianco += spostaAvanti[i]
-                    elif (board[i][1] == "C"):
-                        punteggioBianco += alCentro[i]
-                    elif (board[i][1] == "A"):
-                        punteggioBianco += alCentro[i]   
-                elif (board[i][0] == "n"):
+                    if(board[i][j][1] == "P"):
+                        punteggioBianco += spostaAvanti[i*8+j]
+                    elif (board[i][j][1] == "C"):
+                        punteggioBianco += alCentro[i*8+j]
+                    elif (board[i][j][1] == "A"):
+                        punteggioBianco += alCentro[i*8+j]  
+                elif (board[i][j][0] == "n"):
                     # valore del pezzo
-                    punteggioNero += valorePezzi(board[i])
+                    punteggioNero += valorePezzi(board[i][j])
                     # posizione del pezzo 
-                    if(board[i][1] == "P"):
-                        punteggioNero += spostaAvanti[RuotaScacchiera[i]]
-                    elif (board[i][1] == "C"):
-                        punteggioNero += alCentro[RuotaScacchiera[i]]
-                    elif (board[i][1] == "A"):
-                        punteggioNero += alCentro[RuotaScacchiera[i]] 
-    punteggioBianco += tot_posizioni_valide(board,mat)[0] * 100
-    punteggioNero += tot_posizioni_valide(board,mat)[1] * 100
+                    if(board[i][j][1] == "P"):
+                        punteggioNero += spostaAvanti[RuotaScacchiera[i*8+j]]
+                    elif (board[i][j][1] == "C"):
+                        punteggioNero += alCentro[RuotaScacchiera[i*8+j]]
+                    elif (board[i][j][1] == "A"):
+                        punteggioNero += alCentro[RuotaScacchiera[i*8+j]] 
+    punteggioBianco += tot_posizioni_valide(board)[0] * 100
+    punteggioNero += tot_posizioni_valide(board)[1] * 100
     return (punteggioBianco,punteggioNero)
     
 

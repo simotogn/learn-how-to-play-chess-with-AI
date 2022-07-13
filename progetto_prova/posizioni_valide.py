@@ -1,10 +1,6 @@
 from re import I
 
 
-bordo_sx = [0,8,16,24,32,40,48,56]
-bordo_dx = [7,15,23,31,39,47,55,63]
-cornice_interna = [18,19,20,21,26,27,28,29,34,35,36,37,42,43,44,45]
-
 def posizioni_valide_pedoni(mat):
     diz_b = {}
     diz_n = {}
@@ -80,7 +76,7 @@ def posizioni_valide_torri(mat):
                         diz_b[(i,j)].append(i*8+ld)
                 if (j!=0):                                                                  #controllo riga laterale sx
                     ls = j-1
-                    while(ls not in bordo_sx):                                                                                                 
+                    while(ls!=0):                                                                                                 
                         if(mat[i][ls] == ""):
                             diz_b[(i,j)].append(i*8+ls)
                             ls-=1
@@ -128,7 +124,7 @@ def posizioni_valide_torri(mat):
                         diz_n[(i,j)].append(i*8+ld)
                 if (j!=0):                                                   #controllo riga laterale sx
                     ls = j-1
-                    while(ls not in bordo_sx):                                                                                                 
+                    while(ls!=0):                                                                                                 
                         if(mat[i][ls] == ""):
                             diz_n[(i,j)].append(i*8+ls)
                             ls-=1
@@ -224,11 +220,17 @@ def posizioni_valide_alfieri(mat):
                 while(k+1<8 and w+1<8):
                     k+=1
                     w+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag sup sx
@@ -237,11 +239,17 @@ def posizioni_valide_alfieri(mat):
                 while(k+1<8 and w-1>=0):
                     k+=1
                     w-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag inf dx
@@ -250,11 +258,17 @@ def posizioni_valide_alfieri(mat):
                 while(k-1>=0 and w+1<8):
                     k-=1
                     w+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag inf sx
@@ -263,11 +277,17 @@ def posizioni_valide_alfieri(mat):
                 while(k-1>=0 and w-1>=0):
                     k-=1
                     w-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
     return (diz_b,diz_n)
@@ -344,11 +364,17 @@ def posizioni_valide_regina(mat):
                 while(k+1<8 and w+1<8):
                     k+=1
                     w+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag sup sx
@@ -357,11 +383,17 @@ def posizioni_valide_regina(mat):
                 while(k+1<8 and w-1>=0):
                     k+=1
                     w-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag inf dx
@@ -370,11 +402,17 @@ def posizioni_valide_regina(mat):
                 while(k-1>=0 and w+1<8):
                     k-=1
                     w+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #diag inf sx
@@ -383,11 +421,17 @@ def posizioni_valide_regina(mat):
                 while(k-1>=0 and w-1>=0):
                     k-=1
                     w-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #riga sup
@@ -395,11 +439,17 @@ def posizioni_valide_regina(mat):
                 w=j
                 while(k+1<8):
                     k+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #riga inf
@@ -407,11 +457,17 @@ def posizioni_valide_regina(mat):
                 w=j
                 while(k-1>=0):
                     k-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #riga lat dx
@@ -419,11 +475,17 @@ def posizioni_valide_regina(mat):
                 w=j
                 while(w+1<8):
                     w+=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
                 #riga lat sx
@@ -431,19 +493,78 @@ def posizioni_valide_regina(mat):
                 w=j
                 while(w-1>=0):
                     w-=1
-                    if(mat[k][w] == "" or mat[k][w][0] != colore):
+                    if(mat[k][w] == ""):
                         if(colore == "b"):
                             diz_b[(i,j)].append(k*8+w)
                         else:
                             diz_n[(i,j)].append(k*8+w)
+                    elif(mat[k][w][0] != colore):
+                        if(colore == "b"):
+                            diz_b[(i,j)].append(k*8+w)
+                        else:
+                            diz_n[(i,j)].append(k*8+w)
+                        break
                     else:
                         break
 
     return (diz_b,diz_n)
 
-def tot_posizioni_valide(board):            #VA CAMBIATA --> IMPLEMENTARE CON DIZIONARI
+def tot_posizioni_valide(board):           
     pos_val_b = 0
     pos_val_n = 0
-    pos_val_b += len(posizioni_valide_pedoni(board)[0]) + len(posizioni_valide_alfieri(board)[0]) + len(posizioni_valide_cavalli(board)[0]) + len(posizioni_valide_torri(board)[0]) + len(posizioni_valide_regina(board)[0]) + len(posizioni_valide_re(board)[0])
-    pos_val_n += len(posizioni_valide_pedoni(board)[1]) + len(posizioni_valide_alfieri(board)[1]) + len(posizioni_valide_cavalli(board)[1]) + len(posizioni_valide_torri(board)[1]) + len(posizioni_valide_regina(board)[1]) + len(posizioni_valide_re(board)[1])
+    
+    p_v_p_b = posizioni_valide_pedoni(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_pedoni(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
+    p_v_p_b = posizioni_valide_alfieri(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_alfieri(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
+    p_v_p_b = posizioni_valide_cavalli(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_cavalli(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
+    p_v_p_b = posizioni_valide_regina(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_regina(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
+    p_v_p_b = posizioni_valide_re(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_re(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
+    p_v_p_b = posizioni_valide_torri(board)[0]
+    for key in p_v_p_b:
+        for elem in p_v_p_b[key]:
+            pos_val_b+=1
+    p_v_p_n = posizioni_valide_torri(board)[1]
+    for key in p_v_p_n:
+        for elem in p_v_p_n[key]:
+            pos_val_n+=1
+
     return (pos_val_b,pos_val_n) 

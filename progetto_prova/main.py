@@ -4,6 +4,7 @@ import numpy as np
 from valuta import valuta
 from posizioni_valide import *
 from genera_mosse import modifica_board
+from minimax import *
 
 
 #inizializzo la scacchiera implementata come array bidimensionale
@@ -42,13 +43,14 @@ board[0][7] = "bT"
 for j in range(8):
     board[1][j] = "bP"
 
+
 #pezzi neri
 
 board[7][0] = "nT"
 board[7][1] = "nC"
 board[7][2] = "nA"
 board[7][3] = "nQ"
-board[4][4] = "nR"
+board[7][4] = "nR"
 board[7][5] = "nA"
 board[7][6] = "nC"
 board[7][7] = "nT"
@@ -61,9 +63,9 @@ for j in range(8):
 
 def main():
     stampa_board(board)
+    print(valuta(board))
     print("---------------------------Digitare la mossa con la seguente codifica PNG in italiano---------------------------")
 
-    
 
     while(1):
         ret = -1
@@ -71,11 +73,17 @@ def main():
             mossa_bianco = input('Digitare la propria mossa (bianco):  ')
             ret = modifica_board(board,mossa_bianco,"b")
             stampa_board(board)
+            print(valuta(board))
         ret = -1
         while(ret == -1):
-            mossa_nero = input('Digitare la propria mossa (nero):  ')
+            mossa_nero = minimax(board,"n")
+            print(mossa_nero)
             ret = modifica_board(board,mossa_nero,"n")
             stampa_board(board)
+            print(valuta(board))
+    
+    
+
 
 
 main()

@@ -17,7 +17,7 @@ def modifica_board(board,mossa,colore):
             print("mossa errata!!!")
             return -1
         pezzo = mossa[0]
-        print(mossa, i, j)
+        #print(mossa, i, j)
         if(pezzo == "C"):                                                                           #mossa cavallo
             if(colore == "b"):
                 pos_cav = posizioni_valide_cavalli(board)[0]
@@ -130,7 +130,7 @@ def modifica_board(board,mossa,colore):
         if(i<0 or i>7 or j<0 or j>7):
             print("mossa errata!!!")
             return -1
-        print(mossa,i,j)
+        #print(mossa,i,j)
         if(colore == "b"):
             pos_pedoni = posizioni_valide_pedoni(board)[0]
             x = i*8+j
