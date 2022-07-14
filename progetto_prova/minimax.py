@@ -1,3 +1,4 @@
+from operator import truediv
 from genera_mosse import modifica_board
 from posizioni_valide import *
 from valuta import *
@@ -67,48 +68,59 @@ def converti_mossa(board,i,j,mossa):                   #passa da (0,1) : 14 a Ta
         ret = board[i][j][1] + str(ret1) + str(ret2)
     return ret
 
-def minimax_init(board,mio_colore):
-    minimax(board,mio_colore,4)
+def minimax_init_nero(board):
+    return minimax("",board,2,False,-1000000,1000000)
 
-def minimax(board,mio_colore,livello):
-    """ punteggio = -100000
-    mossa_ret = "" """
-    if(livello<0):
-        return
-    elif(livello>0):
-        if(mio_colore == "b"):
-            diz =calcola_tutte_mosse(board,mio_colore)
-            for key in diz:
-                for elem in diz[key]:
-                    board_copy = [["" for i in range(8)]for i in range(8)]
-                    copia_mat(board,board_copy)
-                    mossa = converti_mossa(board,key[0],key[1],elem)
-                    modifica_board(board_copy,mossa,mio_colore)
-                    v = valuta(board_copy)
-                    minimax(board_copy,mio_colore,livello-1)
-                    """ res = v[0] - v[1]
-                    if(res > punteggio):
-                        mossa_ret = mossa
-                        punteggio = res """
-        else:
-            diz =calcola_tutte_mosse(board,mio_colore)
-            for key in diz:
-                for elem in diz[key]:
-                    board_copy = [["" for i in range(8)]for i in range(8)]
-                    copia_mat(board,board_copy)
-                    mossa = converti_mossa(board,key[0],key[1],elem)
-                    modifica_board(board_copy,mossa,mio_colore)
-                    v = valuta(board_copy)
-                    minimax(board_copy,mio_colore,livello-1)
-                    """ res = v[1] - v[0]
-                    if(res > punteggio):
-                        mossa_ret = mossa
-                        punteggio = res """
-    else:                                               #livello 0, ovvero l'ultimo a cui arriviamo
-        
+def minimax_init_bianco(board):
+    return minimax("",board,3,True,-1000000,1000000)                 
+                                                                      #se gioca col bianco massimizza, altrimenti minimizza
+def minimax(m,board,livello,massimizza,a,b):
+    if(livello==0):
+        ret = valuta(board)
+        val = ret[0] - ret[1]
+        #print(val,m)
+        return (val,m)
+    if(massimizza):                                        
+        max = -10000000
+        mossa_migliore = ""
+        mio_colore = "b"
+        diz = calcola_tutte_mosse(board,mio_colore)
+        for key in diz:
+            for elem in diz[key]:
+                board_copy = [["" for i in range(8)]for i in range(8)]
+                copia_mat(board,board_copy)
+                mossa = converti_mossa(board,key[0],key[1],elem)
+                modifica_board(board_copy,mossa,mio_colore)
+                v = minimax(mossa,board_copy,livello-1,False,a,b)[0]
+                if(v > max):
+                    max = v
+                    mossa_migliore = mossa
+                if(v>a):
+                    a = v
+                if(b<=a):
+                    break
+        return (max,mossa_migliore)  
+    else:
+        min = 10000000
+        mossa_migliore = ""
+        mio_colore = "n"
+        diz = calcola_tutte_mosse(board,mio_colore)
+        for key in diz:
+            for elem in diz[key]:
+                board_copy = [["" for i in range(8)]for i in range(8)]
+                copia_mat(board,board_copy)
+                mossa = converti_mossa(board,key[0],key[1],elem)
+                modifica_board(board_copy,mossa,mio_colore)
+                v = minimax(mossa,board_copy,livello-1,True,a,b)[0]                                                                               
+                if(v < min):
+                    min = v
+                    mossa_migliore = mossa
+                if(v<b):
+                    b = v
+                if(b<=a):
+                    break
+        return (min,mossa_migliore)
 
-    """ print(mossa_ret,punteggio)
-    return mossa_ret """
                 
 
 
