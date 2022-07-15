@@ -15,25 +15,25 @@ white = (255,255,255)
 
 clock = pygame.time.Clock()
 scacco_matto = False
-boardIMG = pygame.image.load('img/chessboard.png')
+boardIMG = pygame.image.load('img/chessboard.png').convert_alpha()
 
-pedIMG_n = pygame.image.load('img/pedone.png')
-pedIMG_b = pygame.image.load('img/pedone_b.png')
+pedIMG_n = pygame.image.load('img/pedone.png').convert_alpha()
+pedIMG_b = pygame.image.load('img/pedone_b.png').convert_alpha()
 
-cavIMG_b = pygame.image.load('img/cavallo_b.png')
-cavIMG_n = pygame.image.load('img/cavallo.png')
+cavIMG_b = pygame.image.load('img/cavallo_b.png').convert_alpha()
+cavIMG_n = pygame.image.load('img/cavallo.png').convert_alpha()
 
-alfIMG_b = pygame.image.load('img/alfiere_b.png')
-alfIMG_n = pygame.image.load('img/alfiere.png')
+alfIMG_b = pygame.image.load('img/alfiere_b.png').convert_alpha()
+alfIMG_n = pygame.image.load('img/alfiere.png').convert_alpha()
 
-torreIMG_b = pygame.image.load('img/torre_b.png')
-torreIMG_n = pygame.image.load('img/torre.png')
+torreIMG_b = pygame.image.load('img/torre_b.png').convert_alpha()
+torreIMG_n = pygame.image.load('img/torre.png').convert_alpha()
 
-reginaIMG_b = pygame.image.load('img/regina_b.png')
-reginaIMG_n = pygame.image.load('img/regina.png')
+reginaIMG_b = pygame.image.load('img/regina_b.png').convert_alpha()
+reginaIMG_n = pygame.image.load('img/regina.png').convert_alpha()
 
-reIMG_b = pygame.image.load('img/re_b.png')
-reIMG_n = pygame.image.load('img/re.png')
+reIMG_b = pygame.image.load('img/re_b.png').convert_alpha()
+reIMG_n = pygame.image.load('img/re.png').convert_alpha()
 
 
 

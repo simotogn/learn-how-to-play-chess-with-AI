@@ -69,7 +69,7 @@ def converti_mossa(board,i,j,mossa):                   #passa da (0,1) : 14 a Ta
     return ret
 
 def minimax_init_nero(board):
-    return minimax("",board,2,False,-1000000,1000000)
+    return minimax("",board,4,False,-1000000,1000000)
 
 def minimax_init_bianco(board):
     return minimax("",board,3,True,-1000000,1000000)                 

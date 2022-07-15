@@ -5,7 +5,8 @@ from valuta import valuta
 from posizioni_valide import *
 from genera_mosse import modifica_board
 from minimax import *
-from draw import *
+#from draw import *
+
 
 
 #inizializzo la scacchiera implementata come array bidimensionale
@@ -13,14 +14,17 @@ from draw import *
 
 def stampa_board(board):
     s = ""
-    print("a  b  c  d  e  f  g  h")
+    print("a b c d e f g h")
     print()
     for i in range(8):
         for j in range(8):
             if(board[i][j] == ''):
-                s+="-- "
+                s+=". "
             else:
-                s+=board[i][j] + " "
+                if(board[i][j][0]== "n"):
+                    s+=board[i][j][1].lower() + " "
+                else:
+                    s+=board[i][j][1] + " "
         s+= "  "
         s+= str(i+1)
         s+="\n"
@@ -60,6 +64,38 @@ board[7][7] = "nT"
 for j in range(8):
     board[6][j] = "nP"
 
+""" def draw_win():
+    pygame.init()
+    board_chess(x,y)
+    for i in range(8):
+        for j in range(8):
+            if(board[i][j] == "nP"):
+                gameDisplay.blit(pedIMG_n, (j*75,i*75))
+            if(board[i][j] == "bP"):
+                gameDisplay.blit(pedIMG_b, (j*75,i*75))
+            if(board[i][j] == "nC"):
+                gameDisplay.blit(cavIMG_n, (j*75,i*75))
+            if(board[i][j] == "bC"):
+                gameDisplay.blit(cavIMG_b, (j*75,i*75))
+            if(board[i][j] == "nA"):
+                gameDisplay.blit(alfIMG_n, (j*75,i*75))
+            if(board[i][j] == "bA"):
+                gameDisplay.blit(alfIMG_b, (j*75,i*75))
+            if(board[i][j] == "nT"):
+                gameDisplay.blit(torreIMG_n, (j*75,i*75))
+            if(board[i][j] == "bT"):
+                gameDisplay.blit(torreIMG_b, (j*75,i*75))
+            if(board[i][j] == "nR"):
+                gameDisplay.blit(reIMG_n, (j*75,i*75))
+            if(board[i][j] == "bR"):
+                gameDisplay.blit(reIMG_b, (j*75,i*75))
+            if(board[i][j] == "nQ"):
+                gameDisplay.blit(reginaIMG_n, (j*75,i*75))
+            if(board[i][j] == "bQ"):
+                gameDisplay.blit(reginaIMG_b, (j*75,i*75))
+    pygame.display.update()
+    #clock.tick(1)
+ """
 
 
 def main():
@@ -73,53 +109,27 @@ def main():
         print("Turno: ",end=" ")
         print(t)
         t+=1
-
-        gameDisplay.fill(black)
-        board_chess(x,y)
-        for i in range(8):
-            for j in range(8):
-                if(board[i][j] == "nP"):
-                    pedone_n(j*75,i*75)
-                if(board[i][j] == "bP"):
-                    pedone_b(j*75,(i)*75)
-                if(board[i][j] == "nC"):
-                    cavallo_n(j*75,i*75)
-                if(board[i][j] == "bC"):
-                    cavallo_b(j*75,(i)*75)
-                if(board[i][j] == "nA"):
-                    alfiere_n(j*75,i*75)
-                if(board[i][j] == "bA"):
-                    alfiere_b(j*75,(i)*75)
-                if(board[i][j] == "nT"):
-                    torre_n(j*75,i*75)
-                if(board[i][j] == "bT"):
-                    torre_b(j*75,(i)*75)
-                if(board[i][j] == "nR"):
-                    re_n(j*75,i*75)
-                if(board[i][j] == "bR"):
-                    re_b(j*75,(i)*75)
-                if(board[i][j] == "nQ"):
-                    regina_n(j*75,i*75)
-                if(board[i][j] == "bQ"):
-                    regina_b(j*75,(i)*75)
-
-            
-        pygame.display.update()
-        clock.tick(60)
+        #draw_win()
+    
 
         ret = -1
         while(ret == -1 and not scacco):
-            #mossa_bianco = minimax_init_bianco(board)
-            mossa_bianco = input('Digitare la propria mossa (bianco):  ')
+            mossa_bianco = minimax_init_bianco(board)
+            #mossa_bianco = input('Digitare la propria mossa (bianco):  ')
             print("mossa_bianco: ",end=" ")
             print(mossa_bianco)
-            #ret = modifica_board(board,mossa_bianco[1],"b")
-            ret = modifica_board(board,mossa_bianco,"b")
+            ret = modifica_board(board,mossa_bianco[1],"b")
+            #ret = modifica_board(board,mossa_bianco,"b")
             stampa_board(board)
             if(ret == 10):
                 scacco = True
                 print("Il bianco ha vinto!!!")
-            #draw(board)
+            #pygame.quit()
+            #pygame.display.update()
+            
+
+        
+
         ret = -1
         while(ret == -1 and not scacco):
             #mossa_nero = input('Digitare la propria mossa (nero):  ')
@@ -132,8 +142,12 @@ def main():
             if(ret == 11):
                 scacco = True
                 print("Il nero ha vinto!!!")
-            #draw(board)
+            #pygame.quit()
+            #pygame.display.update()
+            
 
-    
+
+        
+        
     
 main()

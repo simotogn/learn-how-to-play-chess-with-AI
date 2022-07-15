@@ -13,9 +13,7 @@ def check_fine_partita(i,j,board):
 def modifica_board(board,mossa,colore):
 
     #check scacco e scacco matto
-    """ for i in range(8):
-        for j in range(8):
-            return """
+    
 
     #mossa di un cavallo, alfiere, torre, regina o re
     if(len(mossa) == 3):
@@ -134,11 +132,23 @@ def modifica_board(board,mossa,colore):
                                 return r
                             return 0
                 return -1
-        elif(pezzo == "R"):                                                                         #mossa di un re
+        elif(pezzo == "R"):                                                                     #mossa di un re                                                                 
             if(colore == "b"):
                 pos_re = posizioni_valide_re(board)[0]
                 x = i*8+j
                 for key in pos_re:
+                    if(key[0] == 0 and key[1] == 4 and i==0 and j==6 and board[0][7] == "bT"):
+                        board[0][4] = ""
+                        board[0][7] = ""
+                        board[0][5] = "bT"
+                        board[0][6] = "bR"
+                        return 0
+                    if(key == (0,4) and i==0 and j==2 and board[0][0] == "bT"):
+                        board[0][4] = ""
+                        board[0][0] = ""
+                        board[0][3] = "bT"
+                        board[0][2] = "bR"
+                        return 0
                     for elem in pos_re[key]:
                         if (elem == x):
                             board[key[0]][key[1]] = ""
@@ -149,6 +159,18 @@ def modifica_board(board,mossa,colore):
                 pos_re = posizioni_valide_re(board)[1]
                 x = i*8+j
                 for key in pos_re:
+                    if(key[0] == 7 and key[1] == 4 and i==7 and j==6 and board[7][7] == "nT"):
+                        board[7][4] = ""
+                        board[7][7] = ""
+                        board[7][5] = "nT"
+                        board[7][6] = "nR"
+                        return 0
+                    if(key[0] == 7 and key[1] == 4 and i==7 and j==2 and board[7][0] == "nT"):
+                        board[7][4] = ""
+                        board[7][0] = ""
+                        board[7][3] = "nT"
+                        board[7][2] = "nR"
+                        return 0
                     for elem in pos_re[key]:
                         if (elem == x):
                             board[key[0]][key[1]] = ""
