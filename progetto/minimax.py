@@ -68,17 +68,16 @@ def converti_mossa(board,i,j,mossa):                   #passa da (0,1) : 14 a Ta
         ret = board[i][j][1] + str(ret1) + str(ret2)
     return ret
 
-def minimax_init_nero(board):
-    return minimax("",board,4,False,-1000000,1000000)
+def minimax_init_nero(board,d):
+    return minimax("",board,d,False,-1000000,1000000)
 
-def minimax_init_bianco(board):
-    return minimax("",board,3,True,-1000000,1000000)                 
+def minimax_init_bianco(board,d):
+    return minimax("",board,d,True,-1000000,1000000)                 
                                                                       #se gioca col bianco massimizza, altrimenti minimizza
 def minimax(m,board,livello,massimizza,a,b):
     if(livello==0):
         ret = valuta(board)
         val = ret[0] - ret[1]
-        #print(val,m)
         return (val,m)
     if(massimizza):                                        
         max = -10000000

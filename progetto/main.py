@@ -94,57 +94,90 @@ for j in range(8):
             if(board[i][j] == "bQ"):
                 gameDisplay.blit(reginaIMG_b, (j*75,i*75))
     pygame.display.update()
-    #clock.tick(1)
- """
+    clock.tick(1) """
+
 
 
 def main():
     t = 1
-    scacco = False
+    scacco_matto = False
     stampa_board(board)
     print(valuta(board))
-    print("---------------------------Digitare la mossa con la seguente codifica PNG in italiano---------------------------")
+    print("---------------------------Digitare la mossa con la  codifica PNG in italiano---------------------------")
 
-    while(not scacco):
+    scelta = ""
+    while(scelta == ""):
+        scelta = input("Con che colore vuoi giocare? (b, n, nessuno): ")
+        if(scelta == "b"):
+            scelta = "b"
+        elif(scelta == "n"):
+            scelta = "n"
+        elif(scelta == "nessuno"):
+            scelta = "nessuno"
+        else:
+            scelta = ""
+    d = 0
+    while(d == 0):
+        d = input("Scegliere la profondità del minimax (conisgliato da 2 a 4): ")
+    if(scelta == "nessuno"):
+        d2 = 0
+        while(d2 == 0):
+            d2 = input("Scegliere la profondità del minimax (conisgliato da 2 a 4): ")
+    else:
+        d2 = d
+
+    while(not scacco_matto):
         print("Turno: ",end=" ")
         print(t)
         t+=1
         #draw_win()
-    
-
-        ret = -1
-        while(ret == -1 and not scacco):
-            mossa_bianco = minimax_init_bianco(board)
-            #mossa_bianco = input('Digitare la propria mossa (bianco):  ')
-            print("mossa_bianco: ",end=" ")
-            print(mossa_bianco)
-            ret = modifica_board(board,mossa_bianco[1],"b")
-            #ret = modifica_board(board,mossa_bianco,"b")
-            stampa_board(board)
-            if(ret == 10):
-                scacco = True
-                print("Il bianco ha vinto!!!")
-            #pygame.quit()
-            #pygame.display.update()
-            
-
         
-
-        ret = -1
-        while(ret == -1 and not scacco):
-            #mossa_nero = input('Digitare la propria mossa (nero):  ')
-            mossa_nero = minimax_init_nero(board)
-            print("mossa_nero: ",end=" ")
-            print(mossa_nero)
-            ret = modifica_board(board,mossa_nero[1],"n")
-            #ret = modifica_board(board,mossa_nero,"n")
-            stampa_board(board)
-            if(ret == 11):
-                scacco = True
-                print("Il nero ha vinto!!!")
-            #pygame.quit()
-            #pygame.display.update()
-            
+        if(scelta == "b"):
+            ret = -1
+            while(ret == -1 and not scacco_matto):
+                mossa_bianco = input('Digitare la propria mossa (bianco):  ')
+                print("mossa_bianco: ",end=" ")
+                print(mossa_bianco)
+                ret = modifica_board(board,mossa_bianco,"b")
+                stampa_board(board)
+                if(ret == 10):
+                    scacco_matto = True
+                    print("Il bianco ha vinto!!!")
+        
+        elif(scelta == "nessuno" or scelta == "n"):
+            ret = -1
+            while(ret == -1 and not scacco_matto):
+                mossa_bianco = minimax_init_bianco(board,int(d))
+                print("mossa_bianco: ",end=" ")
+                print(mossa_bianco)
+                ret = modifica_board(board,mossa_bianco[1],"b")
+                stampa_board(board)
+                if(ret == 10):
+                    scacco_matto = True
+                    print("Il bianco ha vinto!!!")
+        
+        if(scelta == "n"):
+            ret = -1
+            while(ret == -1 and not scacco_matto):
+                mossa_nero = input('Digitare la propria mossa (nero):  ')
+                print("mossa_nero: ",end=" ")
+                print(mossa_nero)
+                ret = modifica_board(board,mossa_nero,"n")
+                stampa_board(board)
+                if(ret == 11):
+                    scacco_matto = True
+                    print("Il nero ha vinto!!!")
+        if(scelta=="nessuno" or scelta == "b"):
+            ret = -1
+            while(ret == -1 and not scacco_matto):
+                mossa_nero = minimax_init_nero(board,int(d2))
+                print("mossa_nero: ",end=" ")
+                print(mossa_nero)
+                ret = modifica_board(board,mossa_nero[1],"n")
+                stampa_board(board)
+                if(ret == 11):
+                    scacco_matto = True
+                    print("Il nero ha vinto!!!")     
 
 
         

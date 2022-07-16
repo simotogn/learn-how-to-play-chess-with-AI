@@ -1,7 +1,10 @@
+from re import M
 from posizioni_valide import *
 
 
 diz_cod_png = {"a" : 0,"b" : 1,"c" : 2,"d" : 3,"e" : 4,"f" : 5,"g" : 6,"h" : 7}
+
+num = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
 def check_fine_partita(i,j,board):
     if(board[i][j] == "bR"):
@@ -11,19 +14,33 @@ def check_fine_partita(i,j,board):
     return 0
 
 def modifica_board(board,mossa,colore):
-
-    #check scacco e scacco matto
-    
+    #check correttezza mossa
+    if((len(mossa) != 2) and (len(mossa) != 3)):
+        print("mossa errata!!!")
+        return -1
+    elif(len(mossa) == 2):
+        if(not mossa[0].islower()):
+            print("mossa errata!!!")
+            return -1
+        if(mossa[1] not in num):
+            print("mossa errata!!!")
+            return -1
+    elif(len(mossa) == 3):
+        if(not mossa[0].isupper()):
+            print("mossa errata!!!")
+            return -1
+        if(not mossa[1].islower()):
+            print("mossa errata!!!")
+            return -1
+        if(mossa[2] not in num):
+            print("mossa errata!!!")
+            return -1
 
     #mossa di un cavallo, alfiere, torre, regina o re
     if(len(mossa) == 3):
         j = diz_cod_png[mossa[1]]
         i = int(mossa[2]) -1
-        if(i<0 or i>7 or j<0 or j>7):
-            print("mossa errata!!!")
-            return -1
         pezzo = mossa[0]
-        #print(mossa, i, j)
         if(pezzo == "C"):                                                                           #mossa cavallo
             if(colore == "b"):
                 pos_cav = posizioni_valide_cavalli(board)[0]
@@ -184,7 +201,6 @@ def modifica_board(board,mossa,colore):
         if(i<0 or i>7 or j<0 or j>7):
             print("mossa errata!!!")
             return -1
-        #print(mossa,i,j)
         if(colore == "b"):
             pos_pedoni = posizioni_valide_pedoni(board)[0]
             x = i*8+j
