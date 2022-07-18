@@ -64,39 +64,6 @@ board[7][7] = "nT"
 for j in range(8):
     board[6][j] = "nP"
 
-""" def draw_win():
-    pygame.init()
-    board_chess(x,y)
-    for i in range(8):
-        for j in range(8):
-            if(board[i][j] == "nP"):
-                gameDisplay.blit(pedIMG_n, (j*75,i*75))
-            if(board[i][j] == "bP"):
-                gameDisplay.blit(pedIMG_b, (j*75,i*75))
-            if(board[i][j] == "nC"):
-                gameDisplay.blit(cavIMG_n, (j*75,i*75))
-            if(board[i][j] == "bC"):
-                gameDisplay.blit(cavIMG_b, (j*75,i*75))
-            if(board[i][j] == "nA"):
-                gameDisplay.blit(alfIMG_n, (j*75,i*75))
-            if(board[i][j] == "bA"):
-                gameDisplay.blit(alfIMG_b, (j*75,i*75))
-            if(board[i][j] == "nT"):
-                gameDisplay.blit(torreIMG_n, (j*75,i*75))
-            if(board[i][j] == "bT"):
-                gameDisplay.blit(torreIMG_b, (j*75,i*75))
-            if(board[i][j] == "nR"):
-                gameDisplay.blit(reIMG_n, (j*75,i*75))
-            if(board[i][j] == "bR"):
-                gameDisplay.blit(reIMG_b, (j*75,i*75))
-            if(board[i][j] == "nQ"):
-                gameDisplay.blit(reginaIMG_n, (j*75,i*75))
-            if(board[i][j] == "bQ"):
-                gameDisplay.blit(reginaIMG_b, (j*75,i*75))
-    pygame.display.update()
-    clock.tick(1) """
-
-
 
 def main():
     t = 1
@@ -130,7 +97,6 @@ def main():
         print("Turno: ",end=" ")
         print(t)
         t+=1
-        #draw_win()
         
         if(scelta == "b"):
             ret = -1
@@ -179,8 +145,5 @@ def main():
                     scacco_matto = True
                     print("Il nero ha vinto!!!")     
 
-
-        
-        
-    
+ 
 main()
