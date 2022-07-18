@@ -1,9 +1,38 @@
 from operator import truediv
 from genera_mosse import modifica_board
 from posizioni_valide import *
-from valuta import *
 
-diz_cod_png = {0 : "a",1 : "b",2 : "c",3 : "d",4 : "e",5 : "f",6 : "g",7 : "h"}
+diz_cod_png = {0 : "a",1 : "b",2 : "c",3 : "d",4 : "e"}
+
+def valorePezzi(pezzo):
+    if(pezzo == "nP" or pezzo == "bP"):
+        return 100
+    elif(pezzo == "nC" or pezzo == "bC" or pezzo == "nA" or pezzo == "bA"):
+        return 300   
+    elif(pezzo == "nQ" or pezzo == "bQ"):
+        return 900
+    elif(pezzo == "nT" or pezzo == "bT"):
+        return 500
+    elif(pezzo=="nR" or pezzo=="bR"):
+        return 60000
+    else:
+        return 0
+
+def valuta(board):
+    punteggioBianco = 0
+    punteggioNero = 0
+    for i in range(5):
+        for j in range(5):
+            if (board[i][j] != ""):
+                if (board[i][j][0] == "b"):
+                    # valore del pezzo
+                    punteggioBianco += valorePezzi(board[i][j])
+                elif (board[i][j][0] == "n"):
+                    # valore del pezzo
+                    punteggioNero += valorePezzi(board[i][j])
+    punteggioBianco += tot_posizioni_valide(board)[0] * 100
+    punteggioNero += tot_posizioni_valide(board)[1] * 100
+    return (punteggioBianco,punteggioNero)
 
 def unisci_dizionari(diz_a, diz_b):
     if(diz_a == {}):
@@ -55,14 +84,14 @@ def calcola_tutte_mosse(board,colore):
 def converti_mossa(board,i,j,mossa):                   #passa da (0,1) : 14 a Ta6
     ret = ""
     if(board[i][j] != "" and board[i][j][1] == "P"):
-        nuova_i = mossa//8
-        nuova_j = mossa - nuova_i*8
+        nuova_i = mossa//5
+        nuova_j = mossa - nuova_i*5
         ret1 = diz_cod_png[nuova_j]
         ret2 = nuova_i + 1 
         ret = str(ret1) + str(ret2)
     elif(board[i][j] != "" and board[i][j][1] != "P"):
-        nuova_i = mossa//8
-        nuova_j = mossa - nuova_i*8
+        nuova_i = mossa//5
+        nuova_j = mossa - nuova_i*5
         ret1 = diz_cod_png[nuova_j]
         ret2 = nuova_i + 1 
         ret = board[i][j][1] + str(ret1) + str(ret2)
@@ -77,7 +106,7 @@ def minimax_init_bianco(board,d):
 def minimax(m,board,livello,massimizza,a,b):
     if(livello==0):
         ret = valuta(board)
-        val = ret[0] - ret[1]                                          #punteggio bianco - punteggio nero
+        val = ret[0] - ret[1]
         return (val,m)
     if(massimizza):                                        
         max = -10000000
@@ -86,7 +115,7 @@ def minimax(m,board,livello,massimizza,a,b):
         diz = calcola_tutte_mosse(board,mio_colore)
         for key in diz:
             for elem in diz[key]:
-                board_copy = [["" for i in range(8)]for i in range(8)]
+                board_copy = [["" for i in range(5)]for i in range(5)]
                 copia_mat(board,board_copy)
                 mossa = converti_mossa(board,key[0],key[1],elem)
                 modifica_board(board_copy,mossa,mio_colore)
@@ -106,7 +135,7 @@ def minimax(m,board,livello,massimizza,a,b):
         diz = calcola_tutte_mosse(board,mio_colore)
         for key in diz:
             for elem in diz[key]:
-                board_copy = [["" for i in range(8)]for i in range(8)]
+                board_copy = [["" for i in range(5)]for i in range(5)]
                 copia_mat(board,board_copy)
                 mossa = converti_mossa(board,key[0],key[1],elem)
                 modifica_board(board_copy,mossa,mio_colore)

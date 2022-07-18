@@ -43,7 +43,7 @@ def valorePezzi(pezzo):
     elif(pezzo == "nT" or pezzo == "bT"):
         return 500
     elif(pezzo=="nR" or pezzo=="bR"):
-        return 10000
+        return 60000
     else:
         return 0
 
