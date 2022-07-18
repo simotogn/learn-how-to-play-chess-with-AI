@@ -156,8 +156,11 @@ def modifica_board(board,mossa,colore):
                 for key in pos_re:
                     for elem in pos_re[key]:
                         if (elem == x):
+                            r = check_fine_partita(i,j,board)
                             board[key[0]][key[1]] = ""
                             board[i][j] = "bR"
+                            if(r!=0):
+                                return r
                             return 0
                 return -1
             else:
@@ -166,8 +169,11 @@ def modifica_board(board,mossa,colore):
                 for key in pos_re:
                     for elem in pos_re[key]:
                         if (elem == x):
+                            r = check_fine_partita(i,j,board)
                             board[key[0]][key[1]] = ""
                             board[i][j] = "nR"
+                            if(r!=0):
+                                return r
                             return 0
                 return -1
     

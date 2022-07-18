@@ -90,10 +90,7 @@ def rollout(board_att,t):
 
 
 def mcts_pred(turno,curr_node,board):
-    if(turno == "b"):
-        all_moves = calcola_tutte_mosse(board,turno)
-    else:
-        all_moves = calcola_tutte_mosse(board,turno)
+    all_moves = calcola_tutte_mosse(board,turno)
     for key in all_moves:
         for elem in all_moves[key]:
             tmp_state = fai_mossa(key,elem,turno,board)
@@ -138,7 +135,7 @@ def mcts_pred(turno,curr_node,board):
     mossa_migliore = -inf
     m_m = ""
     for elem in curr_node.children:
-        if(elem.t > mossa_migliore):
+        if(elem.t >= mossa_migliore):
             mossa_migliore = elem.t
             m_m = elem.action
     return m_m    
