@@ -36,7 +36,7 @@ def converti_mossa(board,i,j,mossa):                   #passa da (0,1) : 14 a Ta
         ret = board[i][j][1] + str(ret1) + str(ret2)
     return ret
 
-def ucb(curr_node):
+def ucb(curr_node):                                                                 #UPPER CONFIDENCE BOUND
     ans = curr_node.t+2*(sqrt(log(curr_node.N+e+(10**-6))/(curr_node.n+(10**-10))))
     return ans
 

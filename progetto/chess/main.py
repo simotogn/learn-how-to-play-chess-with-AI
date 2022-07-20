@@ -70,7 +70,7 @@ def main():
     scacco_matto = False
     stampa_board(board)
     print(valuta(board))
-    print("---------------------------Digitare la mossa con la  codifica PNG in italiano---------------------------")
+    print("---------------------------Digitare la mossa con la codifica PNG in italiano---------------------------")
 
     scelta = ""
     while(scelta == ""):

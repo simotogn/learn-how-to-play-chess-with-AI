@@ -66,21 +66,25 @@ def main():
     while((scelta == "b" or scelta == "n") and (against != "mcts" and against != "minimax")):
         against = input("Contro chi vuoi giocare? (minimax o mcts) ")
         if(against == "minimax"):
-            d = input("Digitare depth del minimax (consigliato 2/3/4): ")
+            d = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
     pl1 = ""
     pl2 = ""
     while(scelta == "nessuno" and (pl1 != "mcts" and pl1 != "minimax")):
         pl1 = input("Chi vuoi che sia il player 1? (minimax o mcts) ")
         if(pl1 == "minimax"):
-            d = input("Digitare depth del minimax (consigliato 2/3/4): ")
+            d = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
     while(scelta == "nessuno" and (pl2 != "mcts" and pl2 != "minimax")):
         pl2 = input("Chi vuoi che sia il player 2? (minimax o mcts) ")
         if(pl2 == "minimax"):
-            d2 = input("Digitare depth del minimax (consigliato 2/3/4): ")
+            d2 = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
+
+    print("---------------------------Digitare la mossa con la codifica PNG in italiano---------------------------")
 
     while(not scacco_matto):
         print("Turno: ",end=" ")
         print(t)
+        print(valuta(board)[0] - valuta(board)[1])
+        
         t+=1
         
         if(scelta == "b"):
