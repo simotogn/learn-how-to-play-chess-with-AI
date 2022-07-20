@@ -47,7 +47,7 @@ for i in range(5):
 stampa_board(board)
 
 def main():
-    t=0
+    t=1
     scacco_matto = False
 
     
@@ -69,10 +69,11 @@ def main():
             d = input("Digitare depth del minimax (consigliato 2/3/4): ")
     pl1 = ""
     pl2 = ""
-    while(scelta == "nessuno" and (pl1 != "mcts" and pl1 != "minimax") and (pl2 != "mcts" and pl2 != "minimax")):
+    while(scelta == "nessuno" and (pl1 != "mcts" and pl1 != "minimax")):
         pl1 = input("Chi vuoi che sia il player 1? (minimax o mcts) ")
         if(pl1 == "minimax"):
             d = input("Digitare depth del minimax (consigliato 2/3/4): ")
+    while(scelta == "nessuno" and (pl2 != "mcts" and pl2 != "minimax")):
         pl2 = input("Chi vuoi che sia il player 2? (minimax o mcts) ")
         if(pl2 == "minimax"):
             d2 = input("Digitare depth del minimax (consigliato 2/3/4): ")
