@@ -5,7 +5,7 @@ Ho implementato il gioco degli scacchi in versione tradizionale, con scacchiera 
 
 Nella versione tradizionale ho implementato la possibilita' di giocare contro un'AI, realizzata con un algoritmo di ricerca in profondita', ovvero il minimax con potatura apha-beta (di cui un esempio e' illustrato in figura).
 
- ![Image text](./minimax_a_b.jpg) 
+ ![Image text](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/AB_pruning.svg/700px-AB_pruning.svg.png) 
 
 Anche nella versione Gardner Chess 5x5 ho implementato la possibilita' di giocare contro un'AI, ovvero, sia il minimax con potatura alpha-beta, che il Monte Carlo Tree Search, un algoritmo di ricerca che usa Reinforcement Learing e la legge dei grandi numeri per scegliere la mossa migliore da effettuare.
 
