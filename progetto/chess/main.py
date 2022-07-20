@@ -92,6 +92,8 @@ def main():
     else:
         d2 = d
 
+    print("---------------------------Digitare la mossa con la codifica PNG in italiano---------------------------")
+
     while(not scacco_matto):
         print("Turno: ",end=" ")
         print(t)
