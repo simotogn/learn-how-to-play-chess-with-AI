@@ -1,7 +1,7 @@
 from random import randint
 import time
 from math import log,sqrt,e,inf
-from genera_mosse import *
+from genera_mosse_gardner import *
 
 class node():
     def __init__(self):
@@ -61,11 +61,11 @@ def fai_mossa(key, elem, turno,board):
     board_copy = [["" for i in range(8)]for i in range(8)]
     copia_mat(board,board_copy)
     mossa = converti_mossa(board,key[0],key[1],elem)
-    modifica_board(board_copy,mossa,turno)
+    modifica_board(board_copy,mossa,turno,5)
     return board_copy
 
 def mossa_random(board,colore):
-    all_moves = calcola_tutte_mosse(board,colore)
+    all_moves = calcola_tutte_mosse(board,colore,5)
     mosse = []
     for key in all_moves:
         for elem in all_moves[key]:
@@ -82,15 +82,15 @@ def rollout(board_att,t):
 
     while(not is_game_over(board_att)):
         mossa = mossa_random(board_att, t)
-        modifica_board(board_att,mossa,t)
+        modifica_board(board_att,mossa,t,5)
         if(not is_game_over(board_att)):
             mossa = mossa_random(board_att, st)
-            modifica_board(board_att,mossa,st)
+            modifica_board(board_att,mossa,st,5)
     return is_game_over(board_att)
 
 
 def mcts_pred(turno,curr_node,board):
-    all_moves = calcola_tutte_mosse(board,turno)
+    all_moves = calcola_tutte_mosse(board,turno,5)
     for key in all_moves:
         for elem in all_moves[key]:
             tmp_state = fai_mossa(key,elem,turno,board)
