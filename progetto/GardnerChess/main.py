@@ -1,22 +1,16 @@
-from tokenize import String
-from chess import E4
-import numpy as np
-from valuta import valuta
-from posizioni_valide import *
-from genera_mosse import modifica_board
 from minimax import *
-from tts import text_to_speech
+from posizioni_valide import *
+from genera_mosse import *
+from mcts import *
 
-
-#inizializzo la scacchiera implementata come array bidimensionale
 
 
 def stampa_board(board):
     s = ""
-    print("a b c d e f g h")
+    print("a b c d e")
     print()
-    for i in range(8):
-        for j in range(8):
+    for i in range(5):
+        for j in range(5):
             if(board[i][j] == ''):
                 s+=". "
             else:
@@ -30,46 +24,33 @@ def stampa_board(board):
     print(s)
 
 
-board = [["" for i in range(8)] for j in range(8)]
+board = [["" for i in range(5)] for j in range(5)]
 
-#pezzi bianchi
+board[0][0]  = "bT"
+board[0][1]  = "bC"
+board[0][2]  = "bA"
+board[0][3]  = "bQ"
+board[0][4]  = "bR"
 
-board[0][0] = "bT"
-board[0][1] = "bC"
-board[0][2] = "bA"
-board[0][3] = "bQ"
-board[0][4] = "bR"
-board[0][5] = "bA"
-board[0][6] = "bC"
-board[0][7] = "bT"
+for i in range(5):
+    board[1][i] = "bP"
 
+board[4][0]  = "nT"
+board[4][1]  = "nC"
+board[4][2]  = "nA"
+board[4][3]  = "nQ"
+board[4][4]  = "nR"
 
-for j in range(8):
-    board[1][j] = "bP"
+for i in range(5):
+    board[3][i] = "nP"
 
-
-#pezzi neri
-
-board[7][0] = "nT"
-board[7][1] = "nC"
-board[7][2] = "nA"
-board[7][3] = "nQ"
-board[7][4] = "nR"
-board[7][5] = "nA"
-board[7][6] = "nC"
-board[7][7] = "nT"
-
-
-for j in range(8):
-    board[6][j] = "nP"
-
+stampa_board(board)
 
 def main():
-    t = 1
+    t=1
     scacco_matto = False
-    stampa_board(board)
-    
 
+    
     scelta = ""
     while(scelta == ""):
         scelta = input("Con che colore vuoi giocare? (b, n, nessuno): ")
@@ -81,21 +62,29 @@ def main():
             scelta = "nessuno"
         else:
             scelta = ""
-    d = 0
-    while(d == 0):
-        d = input("Scegliere la profondità del minimax (conisgliato da 2 a 4): ")
-    if(scelta == "nessuno"):
-        d2 = 0
-        while(d2 == 0):
-            d2 = input("Scegliere la profondità del minimax (conisgliato da 2 a 4): ")
-    else:
-        d2 = d
+    against = ""
+    while((scelta == "b" or scelta == "n") and (against != "mcts" and against != "minimax")):
+        against = input("Contro chi vuoi giocare? (minimax o mcts) ")
+        if(against == "minimax"):
+            d = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
+    pl1 = ""
+    pl2 = ""
+    while(scelta == "nessuno" and (pl1 != "mcts" and pl1 != "minimax")):
+        pl1 = input("Chi vuoi che sia il player 1? (minimax o mcts) ")
+        if(pl1 == "minimax"):
+            d = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
+    while(scelta == "nessuno" and (pl2 != "mcts" and pl2 != "minimax")):
+        pl2 = input("Chi vuoi che sia il player 2? (minimax o mcts) ")
+        if(pl2 == "minimax"):
+            d2 = input("Digitare depth del minimax (consigliato 2/3/4/5): ")
 
     print("---------------------------Digitare la mossa con la codifica PNG in italiano---------------------------")
 
     while(not scacco_matto):
         print("Turno: ",end=" ")
         print(t)
+        print(valuta(board)[0] - valuta(board)[1])
+        
         t+=1
         
         if(scelta == "b"):
@@ -104,7 +93,7 @@ def main():
                 mossa_bianco = input('Digitare la propria mossa (bianco):  ')
                 print("mossa_bianco: ",end=" ")
                 print(mossa_bianco)
-                ret = modifica_board(board,mossa_bianco,"b",8)
+                ret = modifica_board(board,mossa_bianco,"b")
                 stampa_board(board)
                 if(ret == 10):
                     scacco_matto = True
@@ -113,11 +102,13 @@ def main():
         elif(scelta == "nessuno" or scelta == "n"):
             ret = -1
             while(ret == -1 and not scacco_matto):
-                mossa_bianco = minimax_init_bianco(board,int(d))
+                if((scelta == "n" and against == "mcts") or (scelta == "nessuno" and pl1=="mcts")):
+                    mossa_bianco = mcts("b",board)
+                elif((scelta == "n" and against == "minimax") or (scelta == "nessuno" and pl1=="minimax")):
+                    mossa_bianco = minimax_init_bianco(board,int(d))[1]
                 print("mossa_bianco: ",end=" ")
                 print(mossa_bianco)
-                text_to_speech(mossa_bianco[1])
-                ret = modifica_board(board,mossa_bianco[1],"b",8)
+                ret = modifica_board(board,mossa_bianco,"b")
                 stampa_board(board)
                 if(ret == 10):
                     scacco_matto = True
@@ -129,7 +120,7 @@ def main():
                 mossa_nero = input('Digitare la propria mossa (nero):  ')
                 print("mossa_nero: ",end=" ")
                 print(mossa_nero)
-                ret = modifica_board(board,mossa_nero,"n",8)
+                ret = modifica_board(board,mossa_nero,"n")
                 stampa_board(board)
                 if(ret == 11):
                     scacco_matto = True
@@ -137,15 +128,19 @@ def main():
         if(scelta=="nessuno" or scelta == "b"):
             ret = -1
             while(ret == -1 and not scacco_matto):
-                mossa_nero = minimax_init_nero(board,int(d2))
+                if((scelta == "b" and against == "mcts") or (scelta == "nessuno" and pl2 == "mcts")):
+                    mossa_nero = mcts("n",board)
+                elif(scelta == "b" and against == "minimax"):
+                    mossa_nero = minimax_init_nero(board,int(d))[1]
+                elif(scelta == "nessuno" and pl2 == "minimax"):
+                    mossa_nero = minimax_init_nero(board,int(d2))[1]
                 print("mossa_nero: ",end=" ")
                 print(mossa_nero)
-                text_to_speech(mossa_nero[1])
-                ret = modifica_board(board,mossa_nero[1],"n",8)
+                ret = modifica_board(board,mossa_nero,"n")
                 stampa_board(board)
                 if(ret == 11):
                     scacco_matto = True
-                    print("Il nero ha vinto!!!")     
+                    print("Il nero ha vinto!!!")
 
- 
 main()
+
