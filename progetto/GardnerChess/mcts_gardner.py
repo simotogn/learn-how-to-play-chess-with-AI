@@ -1,7 +1,7 @@
 from random import randint
 import time
 from math import log,sqrt,e,inf
-from genera_mosse import *
+from genera_mosse_gardner import *
 
 class node():
     def __init__(self):

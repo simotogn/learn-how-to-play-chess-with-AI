@@ -1,6 +1,6 @@
 from operator import truediv
-from genera_mosse import modifica_board
-from posizioni_valide import *
+from genera_mosse_gardner import modifica_board
+from posizioni_valide_gardner import *
 
 diz_cod_png = {0 : "a",1 : "b",2 : "c",3 : "d",4 : "e"}
 

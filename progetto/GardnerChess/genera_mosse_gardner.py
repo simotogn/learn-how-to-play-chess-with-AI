@@ -1,5 +1,5 @@
 from re import M
-from posizioni_valide import *
+from posizioni_valide_gardner import *
 
 
 diz_cod_png = {"a" : 0,"b" : 1,"c" : 2,"d" : 3,"e" : 4}

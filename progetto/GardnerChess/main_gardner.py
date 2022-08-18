@@ -1,7 +1,9 @@
-from minimax import *
-from posizioni_valide import *
-from genera_mosse import *
-from mcts import *
+from minimax_gardner import *
+from posizioni_valide_gardner import *
+from genera_mosse_gardner import *
+from mcts_gardner import *
+from tts_gardner import text_to_speech
+import time
 
 
 
@@ -108,6 +110,7 @@ def main():
                     mossa_bianco = minimax_init_bianco(board,int(d))[1]
                 print("mossa_bianco: ",end=" ")
                 print(mossa_bianco)
+                text_to_speech(mossa_bianco)
                 ret = modifica_board(board,mossa_bianco,"b")
                 stampa_board(board)
                 if(ret == 10):
@@ -136,11 +139,18 @@ def main():
                     mossa_nero = minimax_init_nero(board,int(d2))[1]
                 print("mossa_nero: ",end=" ")
                 print(mossa_nero)
+                text_to_speech(mossa_nero)
                 ret = modifica_board(board,mossa_nero,"n")
                 stampa_board(board)
                 if(ret == 11):
                     scacco_matto = True
                     print("Il nero ha vinto!!!")
+
+    time.sleep(5)   
+    if(ret == 11):
+        text_to_speech("Il nero ha vinto")
+    else:
+        text_to_speech("Il bianco ha vinto")
 
 main()
 
