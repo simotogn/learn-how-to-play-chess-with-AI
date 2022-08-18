@@ -1,4 +1,4 @@
-# learn-how-to-play-chess-with-ML
+# learn-how-to-play-chess-with-AI
 
 
 Ho implementato il gioco degli scacchi in versione tradizionale, con scacchiera 8x8 e, in versione Gardner Chess, con scacchiera 5x5.

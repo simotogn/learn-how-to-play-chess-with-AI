@@ -5,8 +5,7 @@ from valuta import valuta
 from posizioni_valide import *
 from genera_mosse import modifica_board
 from minimax import *
-#from draw import *
-
+from tts import text_to_speech
 
 
 #inizializzo la scacchiera implementata come array bidimensionale
@@ -117,6 +116,7 @@ def main():
                 mossa_bianco = minimax_init_bianco(board,int(d))
                 print("mossa_bianco: ",end=" ")
                 print(mossa_bianco)
+                text_to_speech(mossa_bianco[1])
                 ret = modifica_board(board,mossa_bianco[1],"b")
                 stampa_board(board)
                 if(ret == 10):
@@ -140,6 +140,7 @@ def main():
                 mossa_nero = minimax_init_nero(board,int(d2))
                 print("mossa_nero: ",end=" ")
                 print(mossa_nero)
+                text_to_speech(mossa_nero[1])
                 ret = modifica_board(board,mossa_nero[1],"n")
                 stampa_board(board)
                 if(ret == 11):
