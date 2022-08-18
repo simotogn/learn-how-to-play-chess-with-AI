@@ -1,3 +1,4 @@
+from asyncio import sleep
 from tokenize import String
 from chess import E4
 import numpy as np
@@ -6,6 +7,8 @@ from posizioni_valide import *
 from genera_mosse import modifica_board
 from minimax import *
 from tts import text_to_speech
+import time
+
 
 
 #inizializzo la scacchiera implementata come array bidimensionale
@@ -109,6 +112,7 @@ def main():
                 if(ret == 10):
                     scacco_matto = True
                     print("Il bianco ha vinto!!!")
+                    
         
         elif(scelta == "nessuno" or scelta == "n"):
             ret = -1
@@ -122,7 +126,7 @@ def main():
                 if(ret == 10):
                     scacco_matto = True
                     print("Il bianco ha vinto!!!")
-        
+
         if(scelta == "n"):
             ret = -1
             while(ret == -1 and not scacco_matto):
@@ -145,7 +149,12 @@ def main():
                 stampa_board(board)
                 if(ret == 11):
                     scacco_matto = True
-                    print("Il nero ha vinto!!!")     
+                    print("Il nero ha vinto!!!")  
+    time.sleep(5)   
+    if(ret == 11):
+        text_to_speech("Il nero ha vinto")
+    else:
+        text_to_speech("Il bianco ha vinto")
 
  
 main()
