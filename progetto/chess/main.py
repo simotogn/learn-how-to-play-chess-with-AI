@@ -1,4 +1,3 @@
-from asyncio import sleep
 from tokenize import String
 from chess import E4
 import numpy as np
