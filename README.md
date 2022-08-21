@@ -16,5 +16,7 @@ Per il corretto funzionamento dell'algoritmo minimax e' stata realizzata un'eval
 
 La versione di scacchi 5x5 e' stata realizzata per poter far giocare un robot con gli algoritmi citati sopra, senza che faccia cadere i pezzi sulla scacchiera.
 
+Inoltre è stata realizzata una chess pieces detection, che partendo da una foto di una scacchiera riesca ad identificare i pezzi sopra di essa e produrre in output la matrice che rappresenta tale scacchiera. Il link al lavoro svolto su colab è il seguente:
+https://colab.research.google.com/drive/1OOiH7vUv6m47HOVsuLyv6D8BGxFuXPIE?usp=sharing
 
 Simone Tognocchi 1882405.
